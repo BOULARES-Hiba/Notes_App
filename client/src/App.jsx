@@ -8,6 +8,7 @@ import Unauth from "./pages/Unauthorized/Unauth";
 import Notfound from "./pages/notFound/notfound";
 import { useState } from "react";
 import AuthCheck from "./components/auth/AuthCheck";
+import AuthLayout from "./components/auth/AuthLayout";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -28,22 +29,24 @@ function App() {
           } 
         />
         
-      <Route
-        path="auth/login"
-        element={
-          <AuthCheck isAuthenticated={isAuthenticated} user={user}>
-            <Login />
-          </AuthCheck>
-        }
-      />
-      <Route
-        path="auth/register"
-        element={
-          <AuthCheck isAuthenticated={isAuthenticated} user={user}>
-            <Register />
-          </AuthCheck>
-        }
-      />
+      <Route element={<AuthLayout />}>
+  <Route
+    path="auth/login"
+    element={
+      <AuthCheck isAuthenticated={isAuthenticated} user={user}>
+        <Login />
+      </AuthCheck>
+    }
+  />
+  <Route
+    path="auth/register"
+    element={
+      <AuthCheck isAuthenticated={isAuthenticated} user={user}>
+        <Register />
+      </AuthCheck>
+    }
+  />
+</Route>
       <Route
         path="notes"
         element={
