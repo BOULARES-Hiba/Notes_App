@@ -1,4 +1,5 @@
-import axios from "axios";
+import { useAuth } from "@/context/AuthContext";
+
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "sonner"
@@ -6,8 +7,9 @@ export default function Login() {
    const [formData, setFormData] = useState({
     email: "",
     password: "",
-  });
-const API_URL = import.meta.env.VITE_API_URL;
+   });
+    const { login } = useAuth();
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -17,7 +19,9 @@ const API_URL = import.meta.env.VITE_API_URL;
 
   const handleSubmit =async (e) => {
      e.preventDefault();
-    
+      const res = await login(formData);
+    if (res.success) toast.success("Logged in successfully!");
+    else toast.error(res.message);
   };
 
   return (
@@ -66,7 +70,7 @@ const API_URL = import.meta.env.VITE_API_URL;
             type="submit"
             className="rounded-md bg-purple-700 px-4 py-2 text-white font-medium hover:bg-purple-800"
           >
-            Sign Up
+            Sign in
           </button>
         </div>
       </form>

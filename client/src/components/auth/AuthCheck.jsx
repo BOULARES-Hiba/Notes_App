@@ -1,7 +1,9 @@
+import { useAuth } from "@/context/AuthContext";
 import { Navigate, useLocation } from "react-router-dom";
 
-function AuthCheck({ isAuthenticated, user, children }) {
-const location = useLocation();
+function AuthCheck({children }) {
+  const location = useLocation();
+  const { isAuthenticated, user, loading } = useAuth();
   
   // Redirect to login if not authenticated and trying to access protected routes
   if (!isAuthenticated && 

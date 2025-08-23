@@ -1,53 +1,34 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { toast } from "sonner"
-import axios from "axios";
+
+import { useAuth } from "@/context/AuthContext";
 export default function Register() {
    const [formData, setFormData] = useState({
     userName: "",
     email: "",
     password: "",
   });
-const API_URL = import.meta.env.VITE_API_URL;
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
   };
-
+  const { register } = useAuth();
   const handleSubmit = async (e) => {
   e.preventDefault();
+    const res = await register(formData);
 
-  try {
-    const res = await axios.post(`${API_URL}/auth/register`, formData, {
-      withCredentials: true,
-    });
-
-    if (res.data.success) {
+    if (res.success) {
       toast.success("Registration successful! Redirecting to login...");
+      setFormData({ userName: "", email: "", password: "" });
 
-      setFormData({
-        userName: "",
-        email: "",
-        password: "",
-      });
-
-      setTimeout(() => {
-        window.location.href = "/auth/login";
-      }, 2000);
+      setTimeout(() => { window.location.href = "/auth/login" }, 2000);
     } else {
-      toast.error(res.data.message || "Registration failed");
+      toast.error(res.message || "Registration failed");
     }
-  } catch (error) {
-    console.error("Register error:", error);
-
-    if (error.response?.data?.message) {
-      toast.error(error.response.data.message);
-    } else {
-      toast.error("An error occurred during registration");
-    }
-  }
 };
 
 
