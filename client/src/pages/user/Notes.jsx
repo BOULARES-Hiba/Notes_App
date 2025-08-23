@@ -1,6 +1,12 @@
-
+import NavBar from "@/components/NavBar"
 export default function Notes() {
   return (
-    <div>User</div>
+    <>
+     
+
+      <NavBar/>
+      
+    <div className="mt-20">user</div>
+    </>
   )
 }
