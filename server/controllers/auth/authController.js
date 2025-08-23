@@ -5,9 +5,8 @@ import jwt from "jsonwebtoken";
 import { User } from "../../models/user.js";
 
 const JWT_SECRET = process.env.JWT_SECRET || "CLIENT_SECRET_KEY";
-
-const TOKEN_EXPIRATION = process.env.TOKEN_EXPIRATION || "20m";
-
+const TOKEN_EXPIRATION = process.env.TOKEN_EXPIRATION || "1h";
+const COOKIE_MAX_AGE = process.env.COOKIE_MAX_AGE || 3600000;
 
 export const register = async (req, res) => {
   const { userName, email, password } = req.body;
@@ -95,7 +94,7 @@ export const login = async (req, res) => {
        httpOnly: true,
        
       sameSite: "strict",
-      maxAge: 20 * 60 * 1000 
+      maxAge: COOKIE_MAX_AGE
     }).json({
       success: true,
       message: "Logged in successfully.",
