@@ -6,6 +6,7 @@ import cookieParser from 'cookie-parser';
 import cors from 'cors'
 import { AuthRouter } from './routes/auth/auth.js';
 import notesRouter from './routes/notes/notes.js';
+import { AdminRouter } from './routes/admin/admin.js';
 const app = express();
 
 const PORT = process.env.PORT || 5000;
@@ -21,7 +22,8 @@ app.use(cors({
 }));
 
 app.use('/api/auth', AuthRouter)
-app.use('/api/notes',notesRouter)
+app.use('/api/notes', notesRouter)
+app.use("/api/dashboard", AdminRouter);
 app.listen(PORT, () => {
    console.log(`the server is listening in port ${PORT} `);
 })
