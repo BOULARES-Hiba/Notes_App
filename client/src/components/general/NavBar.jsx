@@ -1,19 +1,23 @@
 import { useAuth } from "@/context/AuthContext";
 import { useState } from "react";
 
-export default function NavBar() {
+export default function NavBar({onSearch}) {
   const [searchQuery, setSearchQuery] = useState("");
  
-  const { user } = useAuth(); 
+  const { user ,logout} = useAuth(); 
 
   const handleSearch = (e) => {
     e.preventDefault();
-   
- 
+    onSearch(searchQuery);
   };
 
-  const handleLogout = () => {
-  
+  const handleLogout =async () => {
+    try {
+      await logout();
+      window.location.href = "/auth/login";
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
    
    
   };
