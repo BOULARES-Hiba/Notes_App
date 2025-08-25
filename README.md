@@ -19,7 +19,7 @@ I built this project to strengthen my understanding of the **core fundamentals o
 ## 🔑 Test Admin Access  
 To explore the **admin dashboard**, use:  
 - **Email:** `admin@gmail.com`  
-- **Password:** `admin`  
+- **Password:** `admin0`  
 
 ---
 
