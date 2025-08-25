@@ -91,8 +91,9 @@ export const login = async (req, res) => {
     );
    
      res.cookie("token", token, { 
-       httpOnly: true,
-       
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production", 
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
       sameSite: "strict",
       maxAge: COOKIE_MAX_AGE
     }).json({
@@ -118,10 +119,15 @@ export const login = async (req, res) => {
 
 //logout
 export const logout = (req, res) => {
-  res.clearCookie("token").json({
+  res.clearCookie("token", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax"
+  }).json({
     success: true,
     message: "Logged out successfully!",
   });
+
 };
 
 //auth middleware

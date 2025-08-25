@@ -19,6 +19,7 @@ app.use(express.json());
 app.use(cors({
   origin: process.env.CLIENT_URL,
   credentials: true,
+  exposedHeaders: ['Set-Cookie']
 }));
 
 app.use('/api/auth', AuthRouter)
