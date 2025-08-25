@@ -3,7 +3,7 @@ import { Navigate} from "react-router-dom";
 import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
 import Notes from "./pages/user/Notes";
-import Dashboard from "./pages/admin/dashboard";
+import Dashboard from "./pages/admin/Dashboard";
 import Unauth from "./pages/Unauthorized/Unauth";
 import Notfound from "./pages/notFound/notfound";
 import AuthCheck from "./components/auth/AuthCheck";
